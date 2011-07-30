@@ -3,7 +3,7 @@ from fabric.contrib.files import exists
 
 
 env.user = 'pyrun'
-env.hosts = ['li329-155.members.linode.com']
+env.hosts = ['gitawesome.com']
 
 def hup():
     sudo('svc -t /etc/service/gitawesome')
