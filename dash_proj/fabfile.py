@@ -6,7 +6,7 @@ env.user = 'pyrun'
 env.hosts = ['li329-155.members.linode.com']
 
 def hup():
-    sudo('svc -h /etc/service/gitawesome')
+    sudo('svc -t /etc/service/gitawesome')
 
 def deploy(hard=False):
     """
