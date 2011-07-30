@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+SRC_DIR=/home/pyrun/dash11/dash_proj
+
+cd $SRC_DIR
+source ../virtualenv/bin/activate
+
+export FLAVOR=prod 
+exec envuidgid pyrun python manage.py run_gunicorn --worker-class sync --workers=4 --max-requests=10000 --pid=$SRC_DIR/gunicorn.pid --bind=unix:/tmp/gunicorn.sock --log-file=/var/log/gitawesome/gunicorn.log

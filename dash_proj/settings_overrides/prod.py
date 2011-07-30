@@ -3,8 +3,8 @@ DEBUG = False
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dash_prod',
-        'USER': 'dash',
+        'NAME': 'dash',
+        'USER': 'pyrun',
         'PASSWORD': '',
         'HOST': '',
         'PORT': '',
