@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h3> {{ project.name }} </h3>
+    <table> 
+        <tr><th> Top Players </th></tr>
+        {% for c in commits_by_user %}
+            <tr><td> <a href="{% url gitball_user c.1 %}">{{ c.1 }}</a></td><td>{{ c.0 }}</td></tr>
+        {% endfor %}
+    </table>
+{% endblock content %}

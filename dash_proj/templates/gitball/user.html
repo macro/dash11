@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h3><img src="{{ profile.avatar_url }}" /> {{ profile.user.username }}&rsquo;s Dashboard</h3>
+    <dl>
+        <dt>Yards</dt><dd> {{ profile.yards }} </dd>
+        <dt>Plays</dt>
+        {% for c in commits %}
+            <dd><a href="{{ c.get_github_url }}">{{ c.project.name }} &dash; {{ c.sha }}</a></dd>
+        {% endfor %}
+    </dl>
+{% endblock content %}
