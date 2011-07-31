@@ -8,8 +8,8 @@
         <img class="avatar" src="{{ profile.avatar_url }}" />
         <hgroup>
             <h1>{{ profile.user.username }}</h1>
-            <h2>Adam Kirkwood</h2>
-            <h2>San Francisco</h2>
+            <h2>Full Name Here</h2>
+            <h2>City Name, State</h2>
         </hgroup>
         <div id="user-meta">
             <ul>
@@ -17,12 +17,20 @@
                     <span class="value">{{ profile.points|intcomma }}</span>
                     <span class="key">Points</span>
                     </div></li>
+                <li><div>
+                    <span class="value">XX</span>
+                    <span class="key">Repos</span>
+                    </div></li>
+                <li><div>
+                    <span class="value">X</span>
+                    <span class="key">Gists</span>
+                    </div></li>
             </ul>
         </div>
     </header>
     
     <section>
-        <h1>Commits</h1>
+        <h1>Projects</h1>
         
         {% for project, commits in commits_by_project %}
         <h2><a href="{% url gitawesome_project profile.slug project.slug %}">{{ project.name }}</a><span>{{ commits|length }}</span></h2>
