@@ -160,3 +160,8 @@ def import_and_analyze_repo(username, project_name):
         calculate_points(p)
     print "*** [DEBUG] imported %d commits" % imported_count
 
+def get_github_repo_url(username, project_name):
+    assert username is not None
+    assert project_name is not None
+
+    return GITHUB_REPO_BASE % (username, project_name)
