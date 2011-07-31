@@ -7,6 +7,7 @@ celery
 django-celery
 ghettoq
 GitPython
+-e git+https://github.com/ask/django-kombu.git/#egg=django-kombu
 
 python-memcached
 psycopg2

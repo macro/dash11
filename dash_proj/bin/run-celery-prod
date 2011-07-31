@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+SRC_DIR=/home/pyrun/dash11/dash_proj/
+
+cd $SRC_DIR
+source ../virtualenv/bin/activate
+
+export FLAVOR=prod 
+exec envuidgid pyrun python manage.py celeryd
