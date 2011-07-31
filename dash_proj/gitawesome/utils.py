@@ -123,6 +123,3 @@ def import_from_repo(username, project_name):
         #print "*** [DEBUG] imported commit", sha
     print "*** [DEBUG] imported %d commits" % imported_count
 
-#import_from_repo('benoitc', 'gunicorn')
-for p in Profile.objects.filter(user__is_active=True):
-    calculate_points(p)

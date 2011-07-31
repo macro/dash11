@@ -7,7 +7,7 @@
     <table> 
         <tr><th> Top Players </th></tr>
         {% for c in commits_by_user|slice:"20" %}
-            <tr><td> <a href="{% url gitawesome_user c.1 %}">{{ c.1 }}</a></td><td>{{ c.0|intcomma }}</td></tr>
+            <tr><td> <a href="{% url gitawesome_user c.1 %}">{{ c.1 }}</a></td><td class="right">{{ c.0|intcomma }}</td></tr>
         {% endfor %}
     </table>
 {% endblock content %}

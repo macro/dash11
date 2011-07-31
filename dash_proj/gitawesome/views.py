@@ -1,3 +1,4 @@
+from collections import defaultdict
 import itertools, operator
 
 from django.core.cache import cache
@@ -29,9 +30,13 @@ def user(request, username):
         #return HttpResponseRedirect(reverse('gitawesome_dashboard',
         #args=(request.user.username,)))
         pass
+    commits_by_project = defaultdict(list)
+    for c in Commit.objects.filter(
+            user=profile.user).order_by('project__id'):
+        commits_by_project[c.project].append(c)
     context = {
         'profile': profile,
-        'commits': Commit.objects.filter(user=profile.user),
+        'commits_by_project': commits_by_project.iteritems(),
     }
     return render_to_response('gitawesome/user.html', context,
         context_instance=RequestContext(request))
@@ -42,7 +47,6 @@ def project(request, username, project_name):
     if context is None:
         profile = get_object_or_404(Profile, slug=slugify(username))
         project = get_object_or_404(Project, slug=slugify(project_name))
-
         user_commits = itertools.groupby(sorted(project.commit_set.all(),
                     key=operator.attrgetter('user.pk')),
                 operator.attrgetter('user'))
