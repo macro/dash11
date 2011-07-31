@@ -7,33 +7,47 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
-        # Adding field 'Commit.yards'
-        db.add_column('gitball_commit', 'yards', self.gf('django.db.models.fields.IntegerField')(default=0), keep_default=False)
 
-        # Adding field 'Profile.avatar_url'
-        db.add_column('gitball_profile', 'avatar_url', self.gf('django.db.models.fields.URLField')(default='', max_length=200), keep_default=False)
+        # Adding model 'Project'
+        db.create_table('gitawesome_project', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=256)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=256, db_index=True)),
+            ('url', self.gf('django.db.models.fields.URLField')(max_length=200)),
+        ))
+        db.send_create_signal('gitawesome', ['Project'])
 
-        # Changing field 'Profile.user'
-        db.alter_column('gitball_profile', 'user_id', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['auth.User'], unique=True))
+        # Adding model 'Profile'
+        db.create_table('gitawesome_profile', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
+            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=256, db_index=True)),
+            ('github_url', self.gf('django.db.models.fields.URLField')(max_length=200)),
+            ('yards', self.gf('django.db.models.fields.IntegerField')()),
+            ('passes', self.gf('django.db.models.fields.IntegerField')()),
+        ))
+        db.send_create_signal('gitawesome', ['Profile'])
 
-        # Adding unique constraint on 'Profile', fields ['user']
-        db.create_unique('gitball_profile', ['user_id'])
+        # Adding model 'Commit'
+        db.create_table('gitawesome_commit', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
+            ('project', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['gitawesome.Project'])),
+            ('sha', self.gf('django.db.models.fields.CharField')(max_length=256)),
+        ))
+        db.send_create_signal('gitawesome', ['Commit'])
 
 
     def backwards(self, orm):
-        
-        # Removing unique constraint on 'Profile', fields ['user']
-        db.delete_unique('gitball_profile', ['user_id'])
 
-        # Deleting field 'Commit.yards'
-        db.delete_column('gitball_commit', 'yards')
+        # Deleting model 'Project'
+        db.delete_table('gitawesome_project')
 
-        # Deleting field 'Profile.avatar_url'
-        db.delete_column('gitball_profile', 'avatar_url')
+        # Deleting model 'Profile'
+        db.delete_table('gitawesome_profile')
 
-        # Changing field 'Profile.user'
-        db.alter_column('gitball_profile', 'user_id', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User']))
+        # Deleting model 'Commit'
+        db.delete_table('gitawesome_commit')
 
 
     models = {
@@ -73,30 +87,29 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        'gitball.commit': {
+        'gitawesome.commit': {
             'Meta': {'object_name': 'Commit'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'project': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['gitball.Project']"}),
+            'project': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['gitawesome.Project']"}),
             'sha': ('django.db.models.fields.CharField', [], {'max_length': '256'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
-            'yards': ('django.db.models.fields.IntegerField', [], {'default': '0'})
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
         },
-        'gitball.profile': {
+        'gitawesome.profile': {
             'Meta': {'object_name': 'Profile'},
-            'avatar_url': ('django.db.models.fields.URLField', [], {'max_length': '200'}),
+            'github_url': ('django.db.models.fields.URLField', [], {'max_length': '200'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'passes': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'db_index': 'True', 'max_length': '256', 'blank': 'True'}),
-            'user': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['auth.User']", 'unique': 'True'}),
-            'yards': ('django.db.models.fields.IntegerField', [], {'default': '0'})
+            'passes': ('django.db.models.fields.IntegerField', [], {}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '256', 'db_index': 'True'}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
+            'yards': ('django.db.models.fields.IntegerField', [], {})
         },
-        'gitball.project': {
+        'gitawesome.project': {
             'Meta': {'object_name': 'Project'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '256'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'db_index': 'True', 'max_length': '256', 'blank': 'True'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '256', 'db_index': 'True'}),
             'url': ('django.db.models.fields.URLField', [], {'max_length': '200'})
         }
     }
 
-    complete_apps = ['gitball']
+    complete_apps = ['gitawesome']

@@ -9,16 +9,16 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.template.defaultfilters import slugify
 
-from gitball.models import Project, Profile, Commit
+from gitawesome.models import Project, Profile, Commit
 
 
 def home(request):
     if request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('gitball_user',
+        return HttpResponseRedirect(reverse('gitawesome_user',
                     args=(request.user.username,)))
     context = {
     }
-    return render_to_response('gitball/home.html', context,
+    return render_to_response('gitawesome/home.html', context,
         context_instance=RequestContext(request))
 
 def user(request, username):
@@ -26,14 +26,14 @@ def user(request, username):
     if (request.user.is_authenticated() and
             profile.user.username == request.user.username):
         # show dashboard
-        #return HttpResponseRedirect(reverse('gitball_dashboard',
+        #return HttpResponseRedirect(reverse('gitawesome_dashboard',
         #args=(request.user.username,)))
         pass
     context = {
         'profile': profile,
         'commits': Commit.objects.filter(user=profile.user),
     }
-    return render_to_response('gitball/user.html', context,
+    return render_to_response('gitawesome/user.html', context,
         context_instance=RequestContext(request))
 
 def project(request, username, project_name):
@@ -54,6 +54,6 @@ def project(request, username, project_name):
             'commits_by_user': commits_by_user,
         }
         cache.set(key, context, 3600)
-    return render_to_response('gitball/project.html', context,
+    return render_to_response('gitawesome/project.html', context,
         context_instance=RequestContext(request))
 

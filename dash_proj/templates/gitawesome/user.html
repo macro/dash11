@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% load humanize %}
+
+{% block content %}
+    <h3><img src="{{ profile.avatar_url }}" /> {{ profile.user.username }}&rsquo;s Scorecard</h3>
+    <dl>
+        <dt>Yards</dt><dd> {{ profile.yards|intcomma }} </dd>
+        <dt>Plays ({{ commits|length|intcomma }})</dt>
+        {% for c in commits|slice:"20" %}
+            <dd class="right"><a href="{{ c.get_github_url }}">{{ c.project.name }} &dash; {{ c.sha }}</a></dd>
+        {% endfor %}
+    </dl>
+{% endblock content %}

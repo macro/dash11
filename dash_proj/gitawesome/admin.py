@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from gitball.models import Profile, Project, Commit
+from gitawesome.models import Profile, Project, Commit
 
 
 admin.site.register(Profile)

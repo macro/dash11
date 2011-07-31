@@ -7,13 +7,13 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Deleting field 'Profile.github_url'
-        db.delete_column('gitball_profile', 'github_url')
+        db.delete_column('gitawesome_profile', 'github_url')
 
 
     def backwards(self, orm):
-        
+
         # User chose to not deal with backwards NULL issues for 'Profile.github_url'
         raise RuntimeError("Cannot reverse this migration. 'Profile.github_url' and its values cannot be restored.")
 
@@ -55,14 +55,14 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        'gitball.commit': {
+        'gitawesome.commit': {
             'Meta': {'object_name': 'Commit'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'project': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['gitball.Project']"}),
+            'project': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['gitawesome.Project']"}),
             'sha': ('django.db.models.fields.CharField', [], {'max_length': '256'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
         },
-        'gitball.profile': {
+        'gitawesome.profile': {
             'Meta': {'object_name': 'Profile'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'passes': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
@@ -70,7 +70,7 @@ class Migration(SchemaMigration):
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
             'yards': ('django.db.models.fields.IntegerField', [], {'default': '0'})
         },
-        'gitball.project': {
+        'gitawesome.project': {
             'Meta': {'object_name': 'Project'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '256'}),
@@ -79,4 +79,4 @@ class Migration(SchemaMigration):
         }
     }
 
-    complete_apps = ['gitball']
+    complete_apps = ['gitawesome']

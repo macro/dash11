@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     (r'^accounts/login/$', login, {}, 'login'),
     (r'^accounts/logout/$', logout, {'next_page': '/'}, 'logout'),
 
-    url(r'^', include('dash_proj.gitball.urls')),
+    url(r'^', include('dash_proj.gitawesome.urls')),
 )
 
 urlpatterns += staticfiles_urlpatterns()
