@@ -122,7 +122,8 @@ table { border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px;
 #profile header,
 #project header { border-radius: 6px 6px 0 0; -moz-border-radius: 6px 6px 0 0; -webkit-border-radius: 6px 6px 0 0; }
  
-#masthead .wrapper { background-color: black; margin: 0 auto 40px auto; height: 40px; border-radius: 0 0 10px 10px;}
+#masthead { background-color: black; height: 40px; margin: 0 0 40px 0; }
+#masthead .wrapper {  margin: 0 auto; height: 40px;}
 #masthead h1 { float: left; width: 200px; line-height: 40px; margin: 0 10px; color: white; }
 #masthead nav { float: right; margin: 0 10px 0 0;}
 #masthead nav .connect { background: url('../img/github_signin.png') 0px 0px no-repeat; width: 150px; height: 22px; display: block; margin: 8px 0 0 0;}
@@ -154,11 +155,11 @@ table .date { width: 200px; }
 #profile .wrapper { background-color: #f1f1f1; }
 
 /* user info */
-#profile header { background-color: #dbdfe2;  float: left; width: 100%; margin: 0 0 20px 0; }
-#profile .avatar { margin: 20px 0 20px 20px; float: left; }
-#profile hgroup { margin: 20px; float: left; width: 200px; }
-#profile header h1 { font-size: 30px; display: inline-block; width: 100%; }
-#profile header h2 { font-size: 12px; display: inline-block; width: 100%; }
+#profile #profile-details { background-color: #c2c8ca;  float: left; width: 100%; margin: 0 0 20px 0; }
+#profile #profile-details .avatar { margin: 20px 0 20px 20px; float: left; }
+#profile #profile-details hgroup { margin: 20px; float: left; width: 200px; }
+#profile #profile-details h1 { font-size: 30px; display: inline-block; width: 100%; }
+#profile #profile-details h2 { font-size: 12px; display: inline-block; width: 100%; color: #666666; }
 
 /* user meta */
 #profile #user-meta { float: right; margin: 20px; }
@@ -183,9 +184,9 @@ table .date { width: 200px; }
 
 #project { }
 #project .wrapper { background-color: #f1f1f1; }
-#project header { background-color: #dbdfe2;  float: left; width: 100%; margin: 0 0 20px 0; }
-#project header h1 { background-color: transparent;  font-size: 30px; }
-#project header h2 { background-color: transparent;  font-size: 18px; }
+#project #project-details { background-color: #c2c8ca;  float: left; width: 100%; margin: 0 0 20px 0; }
+#project #project-details h1 { background-color: transparent;  font-size: 30px; margin: 20px 0 0 20px; }
+#project #project-details h2 { background-color: transparent;  font-size: 12px; margin: 0 0 20px 20px; color: #666666; }
 
 /* top contributors list */
 #project #top-contributors { background-color: #f1f1f1; margin: 20px; padding: 0 0 20px 0; }
