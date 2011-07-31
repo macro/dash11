@@ -12,6 +12,20 @@
     </header>
 
     <section id="contributors-list">
+        <article id="top-contributors">
+            <header>
+                <h2>Top Contributors</h2>
+            </header>
+            <ul>
+                {% for points, project_user in commits|slice:"5" %}
+                <li>
+                    <img src="{{ project_user.profile.avatar_url }}" />
+                    <a href="{% url gitawesome_user project_user.profile.slug %}">{{ project_user.username }}</a>
+                    <div><span>{{ points|intcomma }}</span></div>
+                </li>
+                {% endfor %}
+            </ul>
+        </article>
 
         <article id="contributors">
             <header>
@@ -19,13 +33,13 @@
             </header>
             <table>
                 <tr>
-                    <th class="contributor">Contributor</th>
-                    <th class="points">Points</th>
+                    <th>Name</th>
+                    <th>Points</th>
                 </tr>    
-            {% for points, project_user in commits|slice:"20" %}
+            {% for points, project_user in commits|slice:"5:15" %}
                 <tr class="{% cycle "even" "odd" %}">
-                    <td> 
-                        <img class="avatar-small" src="{{ project_user.profile.avatar_url }}" />
+                    <td class="name"> 
+                        <img src="{{ project_user.profile.avatar_url }}" />
                         <a href="{% url gitawesome_user project_user.profile.slug %}">{{ project_user.username }}</a></td>
                     <td class="points">
                         <div><span>{{ points|intcomma }}</span></div></td>

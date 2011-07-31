@@ -8,22 +8,21 @@
         <img class="avatar" src="{{ profile.avatar_url }}" />
         <hgroup>
             <h1>{{ profile.user.username }}</h1>
-            <h2>Full Name Here</h2>
-            <h2>City Name, State</h2>
+            <h2>{{ profile.location }}</h2>
         </hgroup>
         <div id="user-meta">
             <ul>
                 <li><div>
                     <span class="value">{{ profile.points|intcomma }}</span>
-                    <span class="key">Points</span>
+                    <span class="key">Point{{ profile.points|pluralize }}</span>
                     </div></li>
                 <li><div>
-                    <span class="value">XX</span>
-                    <span class="key">Repos</span>
+                    <span class="value">{{ profile.repos }}</span>
+                    <span class="key">Repo{{ profile.repos|pluralize }}</span>
                     </div></li>
                 <li><div>
-                    <span class="value">X</span>
-                    <span class="key">Gists</span>
+                    <span class="value">{{ profile.gists }}</span>
+                    <span class="key">Gist{{ profile.gists|pluralize }}</span>
                     </div></li>
             </ul>
         </div>
@@ -35,17 +34,19 @@
         {% for project, commits in commits_by_project %}
         <article class="project">
             <header>
-                <h2><a href="{% url gitawesome_project profile.slug project.slug %}">{{ project.name }}</a><span>{{ commits|length }} commits</span></h2>
+                <h2><a href="{% url gitawesome_project profile.slug project.slug %}">{{ project.name }}</a><span>{{ commits|length }} commit{{ commits|length|pluralize }}</span></h2>
             </header>
             <table>
                 <tr>
                     <th class="sha">SHA</th>
                     <th class="points">Points</th>
+                    <th class="date">Date</th>
                 </th>
             {% for commit in commits|slice:"10" %}
                 <tr class="{% cycle "even" "odd" %}">
                     <td class="sha"><a href="{{ c.get_github_url }}">{{ commit.sha|slice:"10" }}</a></td>
                     <td class="points"><div><span>{{ commit.points }}</span></div></td>
+                    <td>{{ commit.timestamp }}</td>
                 </tr>
             {% endfor %}
             </table>
