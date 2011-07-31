@@ -86,7 +86,7 @@ a:hover { color: #036; }
     \\ ========================================== //
 */
 
-body { background-color: #34393c; }
+body { background: url('../img/bg_texture.jpg'); }
 
 .wrapper { width: 820px; margin: 0 auto; }
 
@@ -126,10 +126,11 @@ table { border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px;
 #masthead .wrapper {  margin: 0 auto; height: 40px;}
 #masthead h1 { float: left; width: 200px; line-height: 40px; margin: 0 10px; color: white; }
 #masthead nav { float: right; margin: 0 10px 0 0;}
-#masthead nav .connect { background: url('../img/github_signin.png') 0px 0px no-repeat; width: 150px; height: 22px; display: block; margin: 8px 0 0 0;}
-#masthead nav .connect:hover { background-position: 0px -24px; }
-#masthead nav .connect:active { background-position: 0px -48px; }
-#masthead nav .connect span { display: inline-block; margin-left: -9999px; }
+
+.connect { background: url('../img/github_signin.png') 0px 0px no-repeat; width: 150px; height: 22px; display: block; margin: 8px 0 0 0;}
+.connect:hover { background-position: 0px -24px; }
+.connect:active { background-position: 0px -48px; }
+.connect span { display: inline-block; margin-left: -9999px; }
  
 /* tables */
 table { width: 100%; background-color: #f5f6fa; }
@@ -143,6 +144,17 @@ table .points div span { display: block; float: left; padding: 0 10px; height: 3
 table .name { font-size: 16px; line-height: 30px; }
 table .name img { vertical-align: middle; }
 table .date { width: 200px; }
+
+
+/*
+ * Profile =p
+ *************************************************************************** */
+#home { background: url('../img/bg_gitawesome.png') right 0px no-repeat; color: white; height: 400px; width: 820px; margin: 120px auto 0 auto; }
+#home h1 { font-size: 30px; }
+#home ul { list-style: none; margin: 20px 0; padding: 0; }
+#home ul li { margin: 5px 0; }
+#home #cta { float: left; }
+#home #cta .note { font-style: italic; color: #6f6f6f; font-size: 10px; margin: 5px 0;}
 
 
 

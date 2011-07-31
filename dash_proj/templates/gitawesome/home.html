@@ -1,13 +1,18 @@
 {% extends "base.html" %}
 
+{% block section_id %}home{% endblock section_id %}
 {% block content %}
-<div>
-    <h3>Signup now to:</h3>
-    <ul>
-        <li>See awesome stats about your GitHub account.</li>
-        <li>Compare your stats againsts your friends.</li>
-    </ul>
+<h1>Be git awesome.</h1>
 
-    <h4><a href="{% url login %}">login now</a></h4>
+<ul>
+    <li>See awesome stats about your GitHub account.</li>
+    <li>Compare your stats againsts your friends.</li>
+    <li>Raise a dolphin army.*</li>
+    <li>Win at life.</li>
+</ul>
+
+<div id="cta">
+    <a href="{% url login %}" class="connect"><span>login</span></a>
+    <p class="note">* Dolphins not included</p>
 </div>
 {% endblock content %}
