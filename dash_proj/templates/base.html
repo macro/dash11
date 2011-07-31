@@ -37,7 +37,7 @@
                             <li><a href="{% url gitawesome_home %}">{{ request.user.username }}</a> |</li>
                             <li><a href="{% url logout %}">logout</a></li>
                         {% else %}
-                            <li><a href="{% url login %}">login</a></li>
+                            <li><a href="{% url login %}" class="connect"><span>login</span></a></li>
                         {% endif %}
                     </ul>
                 </nav>

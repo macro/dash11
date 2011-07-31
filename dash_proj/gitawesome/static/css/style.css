@@ -122,7 +122,13 @@ table { border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px;
 #profile header,
 #project header { border-radius: 6px 6px 0 0; -moz-border-radius: 6px 6px 0 0; -webkit-border-radius: 6px 6px 0 0; }
  
-#masthead .wrapper { background-color: black; margin: 0 auto 40px auto; }
+#masthead .wrapper { background-color: black; margin: 0 auto 40px auto; height: 40px; border-radius: 0 0 10px 10px;}
+#masthead h1 { float: left; width: 200px; line-height: 40px; margin: 0 10px; color: white; }
+#masthead nav { float: right; margin: 0 10px 0 0;}
+#masthead nav .connect { background: url('../img/github_signin.png') 0px 0px no-repeat; width: 150px; height: 22px; display: block; margin: 8px 0 0 0;}
+#masthead nav .connect:hover { background-position: 0px -24px; }
+#masthead nav .connect:active { background-position: 0px -48px; }
+#masthead nav .connect span { display: inline-block; margin-left: -9999px; }
  
 /* tables */
 table { width: 100%; background-color: #f5f6fa; }
