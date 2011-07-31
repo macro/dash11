@@ -160,4 +160,3 @@ def import_and_analyze_repo(username, project_name):
         calculate_points(p)
     print "*** [DEBUG] imported %d commits" % imported_count
 
-import_and_analyze_repo("rails", "rails")
