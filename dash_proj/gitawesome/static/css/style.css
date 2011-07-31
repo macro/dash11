@@ -135,6 +135,9 @@ table { border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px;
 #masthead h1 { float: left; width: 200px; line-height: 40px; margin: 0 10px; font-size: 16px; }
 #masthead h1 a { color: white; text-decoration: none; }
 #masthead nav { float: right; margin: 0 10px 0 0;}
+#masthead nav ul { margin: 0; padding: 0; height: 40px; }
+#masthead nav ul li { line-height: 40px; float: left; margin: 0 0 0 15px;}
+#masthead nav a { color: white; font-size: 14px; }
 
 .connect { background: url('../img/github_signin.png') 0px 0px no-repeat; width: 150px; height: 22px; display: block; margin: 8px 0 0 0;}
 .connect:hover { background-position: 0px -24px; }
