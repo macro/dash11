@@ -3,6 +3,9 @@ south==0.7.3
 fabric==1.2.0
 simplejson
 gunicorn
+celery
+django-celery
+ghettoq
 
 python-memcached
 psycopg2

@@ -1,14 +1,17 @@
+import os
+from datetime import datetime
 import time
 
+from dateutil import parser as date_parser
+import git
+
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models.aggregates import Sum
 
-import git
-import simplejson
-
 from lib import github
 
-from gitawesome.models import Commit, Project, Profile
+from gitawesome.models import Commit, Project
 
 
 GITHUB_REPO_BASE = 'https://github.com/%s/%s/'
@@ -50,13 +53,6 @@ def import_commits(user, project_name, sha=None):
         print "*** [DEBUG] imported commit", sha
     return commits
 
-def calculate_points(profile):
-    """
-    Calculate points for given user.
-    """
-    profile.points = Commit.objects.filter(user=profile.user).aggregate(total=Sum('points')).get('total')
-    profile.save()
-
 def get_commit_info(commit):
     fields = (
         'hexsha',
@@ -75,9 +71,12 @@ def get_commit_info(commit):
         return obj
     return dict((f,_getattr(commit, f, '')) for f in fields)
 
+def strip_encode(s):
+    return str.strip((s or '').encode('utf-8'))
+
 def import_contributors(username, project_name):
-    #contributors = github.get_contributors(username, project_name)
-    contributors = simplejson.loads(open('contributors.json').read())
+    contributors = github.get_contributors(username, project_name)
+    profiles = list()
     for c in contributors:
         user, created = User.objects.get_or_create(username=c['login'])
         if created:
@@ -87,42 +86,76 @@ def import_contributors(username, project_name):
             github_user = github.get_user(c['login'])
             if not github_user.get('email'):
                 continue
-            user.email = github_user['email']
+            try:
+                parts = github_user['name'].split()
+                first, last = parts[0], parts[-1]
+            except:
+                first = github_user['name']
+                last = ''
+            user.first_name = strip_encode(first)
+            user.last_name = strip_encode(last)
+            user.email = strip_encode(github_user['email'])
             user.save()
-            user.profile.avatar_url = github_user['avatar_url']
+            user.profile.avatar_url = strip_encode(github_user['avatar_url'])
+            user.profile.followers = github_user['followers']
+            user.profile.following = github_user['following']
+            user.profile.gists = github_user['public_gists']
+            user.profile.repos = github_user['public_repos']
+            user.profile.location = strip_encode(github_user['location'])
+            user.profile.company = strip_encode(github_user['company'])
+            user.profile.blog = strip_encode(github_user['blog'])
+            user.profile.date_joined = date_parser.parse(github_user['created_at'])
             user.profile.save()
+        profiles.append(user.profile)
     print "*** [DEBUG] imported %d users" % len(contributors)
+    return profiles
 
-def import_from_repo(username, project_name):
-    COMMITS_TO_SCORE = 100000
-    import_contributors(username, project_name)
+def calculate_points(profile):
+    """
+    Calculate points for given user.
+    """
+    profile.points = Commit.objects.filter(
+            user=profile.user).aggregate(total=Sum('points')).get('total')
+    profile.save()
+
+def import_and_analyze_repo(username, project_name):
+    COMMITS_TO_SCORE = 10000
+    profiles = import_contributors(username, project_name)
     project_url = GITHUB_REPO_BASE % (username, project_name)
     project, _ = Project.objects.get_or_create(url=project_url,
             defaults={'name': project_name})
-    repo = git.Repo('gunicorn')
+    path = os.path.join(settings.GIT_REPO_ROOT, project_name)
+    try:
+        # check if repo exists
+        git.Repo().pull(project_url, 'refs/heads/master:refs/heads/origin')
+        repo = git.Repo(path)
+    except Exception:
+        # otherwise, clone it
+        repo = git.Repo().clone_from(project_url, path)
     commits = repo.iter_commits('master', max_count=COMMITS_TO_SCORE)
     imported_count = 0
-    users_by_email = dict()
+    users_by_email = dict([(profile.user.email, profile.user)
+            for profile in profiles])
+    print "*** [DEBUG] ", users_by_email.keys()
     for commit_info in commits:
         commit_info = get_commit_info(commit_info)
         email = commit_info['author.email']
+        if not email or email not in users_by_email:
+            print "*** [DEBUG] skipping", email
+            continue
         sha = commit_info['hexsha']
-        if email not in users_by_email:
-            try:
-                users_by_email[email] = User.objects.get(email=email)
-            except User.DoesNotExist:
-                # user not in github, skip commit
-                continue
+        timestamp = datetime.utcfromtimestamp(float(
+                    commit_info['committed_date']))
         commit, _ = Commit.objects.get_or_create(project=project, sha=sha,
-                defaults={'user': users_by_email[email]})
+                defaults={'user': users_by_email[email], 'timestamp': timestamp})
         def _points_from_commit(commit_info):
             return commit_info['stats.total']['lines']
         commit.points = _points_from_commit(commit_info)
-        imported_count +=1
         commit.save()
+        imported_count +=1
         #print "*** [DEBUG] imported commit", sha
+
+    for p in profiles:
+        calculate_points(p)
     print "*** [DEBUG] imported %d commits" % imported_count
 
-import_from_repo('benoitc', 'gunicorn')
-for p in Profile.objects.filter(user__is_active=True):
-    calculate_points(p)

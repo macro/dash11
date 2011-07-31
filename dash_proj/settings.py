@@ -137,6 +137,8 @@ INSTALLED_APPS = (
     # 3rd party
     'south',
     'gunicorn',
+    'celery',
+    'djcelery',
 
     'gitawesome',
 )
@@ -172,6 +174,22 @@ CACHES = {
         'LOCATION': 'adfkljadfazvqre',
     }
 }
+
+import djcelery
+djcelery.setup_loader()
+
+CARROT_BACKEND = 'ghettoq.taproot.Database'
+
+CELERY_RESULT_BACKEND = "database"
+CELERY_RESULT_DBURI = "%(ENGINE)s://%(USER)s:%(PASSWORD)s@%(HOST)s/%(NAME)s" % DATABASES['default']
+
+CELERYD_CONCURRENCY = 1
+CELERY_ALWAYS_EAGER = True
+CELERY_IMPORTS = (
+    'gitawesome.tasks',
+)
+
+GIT_REPO_ROOT = os.path.join(MEDIA_ROOT, '.git.tmp')
 
 def override_settings(dottedpath):
     try:
