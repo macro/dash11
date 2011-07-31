@@ -29,7 +29,7 @@
         
         <header id="masthead">
             <div class="wrapper">
-                <h1 id="branding">gitawesome</h1>
+                <h1 id="branding"><a href="/">gitawesome</a></h1>
                 
                 <nav>
                     <ul>
@@ -37,7 +37,7 @@
                             <li><a href="{% url gitawesome_home %}">{{ request.user.username }}</a> |</li>
                             <li><a href="{% url github_logout %}">logout</a></li>
                         {% else %}
-                            <li><a href="{% url github_login %}">login</a></li>
+                            <li><a href="{% url github_login %}" class="connect"><span>login</span></a></li>
                         {% endif %}
                     </ul>
                 </nav>

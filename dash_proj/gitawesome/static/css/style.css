@@ -92,16 +92,9 @@ html, body {
 
 body { background: url('../img/bg_texture.jpg'); }
 
-#container {
-	min-height: 100%;
-	height: auto !important;
-	height: 100%;
-	margin: 0 auto -30px; /* the bottom margin is the negative value of the footer's height */
-}
+#container { min-height: 100%; height: auto !important; height: 100%; margin: 0 auto -30px; }
 
-#credits, .push {
-	height: 30px; /* .push must be the same height as .footer */
-}
+#credits, .push { height: 30px; }
 
 .wrapper { width: 820px; margin: 0 auto; }
 
@@ -138,8 +131,9 @@ table { border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px;
 #project header { border-radius: 6px 6px 0 0; -moz-border-radius: 6px 6px 0 0; -webkit-border-radius: 6px 6px 0 0; }
  
 #masthead { background-color: black; height: 40px; margin: 0 0 40px 0; }
-#masthead .wrapper {  margin: 0 auto; height: 40px;}
-#masthead h1 { float: left; width: 200px; line-height: 40px; margin: 0 10px; color: white; }
+#masthead .wrapper {  margin: 0 auto; height: 40px; }
+#masthead h1 { float: left; width: 200px; line-height: 40px; margin: 0 10px; font-size: 16px; }
+#masthead h1 a { color: white; text-decoration: none; }
 #masthead nav { float: right; margin: 0 10px 0 0;}
 
 .connect { background: url('../img/github_signin.png') 0px 0px no-repeat; width: 150px; height: 22px; display: block; margin: 8px 0 0 0;}
