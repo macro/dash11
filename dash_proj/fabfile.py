@@ -7,6 +7,7 @@ env.hosts = ['gitawesome.com']
 
 def hup():
     sudo('svc -t /etc/service/gitawesome')
+    sudo('svc -t /etc/service/celeryd')
 
 def cleanup():
     with cd('/home/pyrun/dash11/dash_proj/'):
