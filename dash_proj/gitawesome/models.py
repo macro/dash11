@@ -31,9 +31,6 @@ class Profile(models.Model):
     blog = models.CharField(max_length=128, default='', blank=True)
     date_joined = models.DateTimeField(null=True)
 
-    github_oauth_token = models.CharField(max_length=200)
-    github_oauth_secret = models.CharField(max_length=200)
-
     # stats
     points = models.IntegerField(default=0)
 

@@ -190,9 +190,6 @@ CELERYD_CONCURRENCY = 1
 
 GIT_REPO_ROOT = os.path.join(MEDIA_ROOT, '.git.tmp')
 
-GITHUB_CLIENT_ID = ''
-GITHUB_SECRET = ''
-
 def override_settings(dottedpath):
     try:
         _m = __import__(dottedpath, fromlist=[None])
