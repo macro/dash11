@@ -5,6 +5,7 @@ import time
 from dateutil import parser as date_parser
 import git
 
+from django.core.cache import cache
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models.aggregates import Sum
@@ -158,5 +159,14 @@ def import_and_analyze_repo(username, project_name):
 
     for p in profiles:
         calculate_points(p)
+    invalidate_project_cache(username, project_name)
     print "*** [DEBUG] imported %d commits" % imported_count
 
+def invalidate_project_cache(username, project_name):
+    cache.delete('project-%s-%s' % (username, project_name))
+
+def get_github_repo_url(username, project_name):
+    assert username is not None
+    assert project_name is not None
+
+    return GITHUB_REPO_BASE % (username, project_name)

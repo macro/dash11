@@ -1,7 +1,6 @@
 import urllib
 import urlparse
 from collections import defaultdict
-import itertools, operator
 
 from django.core.cache import cache
 from django.contrib.auth.models import User
@@ -9,12 +8,14 @@ from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.template.defaultfilters import slugify
 
 from gitawesome.models import Project, Profile, Commit
 from gitawesome.forms import RepoForm
 from gitawesome.tasks import analyze_repo
+
+from gitawesome.utils import get_github_repo_url
 
 
 def home(request):
@@ -34,7 +35,7 @@ def repo(request):
             username, project_name = filter(None, parts[2].split('/'))
             User.objects.get_or_create(username=username)
             Project.objects.get_or_create(name=project_name,
-                    url='https://github.com/%s/%s' % (username, project_name))
+                    url=get_github_repo_url(username, project_name))
             analyze_repo.delay(username, project_name)
             return HttpResponseRedirect('%s?%s' % (
                         reverse('gitawesome_repo_queued'), urllib.urlencode({
@@ -56,8 +57,6 @@ def repo_queued(request):
     }
     return render_to_response('gitawesome/repo_queued.html', context,
         context_instance=RequestContext(request))
-
-
 
 def user(request, username):
     profile = get_object_or_404(Profile, slug=slugify(username))
@@ -83,7 +82,10 @@ def project(request, username, project_name):
     context = cache.get(key)
     if context is None:
         profile = get_object_or_404(Profile, slug=slugify(username))
-        project = get_object_or_404(Project, slug=slugify(project_name))
+        try:
+            project = Project.objects.get(url=get_github_repo_url(username, project_name))
+        except Project.DoesNotExist:
+            raise Http404
         commits_by_user = defaultdict(list)
         for c in project.commit_set.all():
             commits_by_user[c.user].append(c)
