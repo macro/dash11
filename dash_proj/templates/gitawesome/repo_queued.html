@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+    <h3>
+    {% if username and project_name %}
+        We are analyzing the repository: https://github.com/{{ username }}/{{ project_name }} 
+        <br />
+        Check the <a href="{% url gitawesome_project username project_name %}">{{ project_name }}</a> project page to see it&rsquo;s stats.
+    {% else %}
+        We are analyzing your repository. 
+    {% endif %}
+    </h3>
+</div>
+{% endblock content %}

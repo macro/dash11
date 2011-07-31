@@ -3,5 +3,8 @@ south==0.7.3
 fabric==1.2.0
 simplejson
 gunicorn
+celery
+django-celery
+ghettoq
 
 -e git+https://github.com/kevinw/pyflakes.git#egg=pyflakes

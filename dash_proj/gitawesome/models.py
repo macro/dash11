@@ -18,12 +18,21 @@ class Project(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User)
-    avatar_url = models.URLField(verify_exists=False)
     slug = models.SlugField(max_length=256, blank=True)
+
+    # github info
+    avatar_url = models.URLField(verify_exists=False)
+    followers = models.IntegerField(default=0)
+    following = models.IntegerField(default=0)
+    gists = models.IntegerField(default=0)
+    repos = models.IntegerField(default=0)
+    location = models.CharField(max_length=128, default='', blank=True)
+    company = models.CharField(max_length=128, default='', blank=True)
+    blog = models.CharField(max_length=128, default='', blank=True)
+    date_joined = models.DateTimeField(null=True)
 
     # stats
     points = models.IntegerField(default=0)
-    passes = models.IntegerField(default=0)
 
     def __unicode__(self):
         return u'%s' % self.user.username
@@ -36,6 +45,7 @@ class Commit(models.Model):
     user = models.ForeignKey(User)
     project = models.ForeignKey(Project)
     sha = models.CharField(max_length=256)
+    timestamp = models.DateTimeField()
 
     points = models.IntegerField(default=0)
 

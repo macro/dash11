@@ -1,3 +1,5 @@
+import urllib
+import urlparse
 from collections import defaultdict
 import itertools, operator
 
@@ -11,16 +13,48 @@ from django.http import HttpResponseRedirect
 from django.template.defaultfilters import slugify
 
 from gitawesome.models import Project, Profile, Commit
+from gitawesome.forms import RepoForm
+from gitawesome.tasks import analyze_repo
 
 
 def home(request):
-    if request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('gitawesome_user',
-                    args=(request.user.username,)))
     context = {
     }
     return render_to_response('gitawesome/home.html', context,
         context_instance=RequestContext(request))
+
+def repo(request):
+    repo_form = RepoForm()
+    if request.method == 'POST':
+        repo_form = RepoForm(request.POST)
+        if repo_form.is_valid():
+            # queue repo analysis
+            url = repo_form.cleaned_data['repo_url']
+            parts = urlparse.urlsplit(url)
+            username, project_name = filter(None, parts[2].split('/'))
+            analyze_repo.delay(username, project_name)
+            return HttpResponseRedirect('%s?%s' % (
+                        reverse('gitawesome_repo_queued'), urllib.urlencode({
+                            'username': username,
+                            'project_name': project_name,
+                        })))
+    context = {
+        'repo_form': repo_form,
+    }
+    return render_to_response('gitawesome/repo.html', context,
+        context_instance=RequestContext(request))
+
+def repo_queued(request):
+    username = request.GET.get('username')
+    project_name = request.GET.get('project_name')
+    context = {
+        'username': username,
+        'project_name': project_name,
+    }
+    return render_to_response('gitawesome/repo_queued.html', context,
+        context_instance=RequestContext(request))
+
+
 
 def user(request, username):
     profile = get_object_or_404(Profile, slug=slugify(username))
