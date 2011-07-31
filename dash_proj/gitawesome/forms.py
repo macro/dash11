@@ -3,8 +3,14 @@ import urlparse
 from django import forms
 
 
+class SmartURLField(forms.URLField):
+    def clean(self, value):
+        value = unicode.strip(value)
+        return super(SmartURLField, self).clean(value)
+
+
 class RepoForm(forms.Form):
-    repo_url = forms.URLField(label='Enter a Github repostitory URL',
+    repo_url = SmartURLField(label='Enter a Github repostitory URL',
             widget=forms.TextInput(attrs={'size':'80'}),
             max_length=512, verify_exists=True,
             error_messages={'required':
