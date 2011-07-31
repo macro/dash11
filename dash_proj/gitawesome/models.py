@@ -22,7 +22,7 @@ class Profile(models.Model):
     slug = models.SlugField(max_length=256, blank=True)
 
     # stats
-    yards = models.IntegerField(default=0)
+    points = models.IntegerField(default=0)
     passes = models.IntegerField(default=0)
 
     def __unicode__(self):
@@ -37,7 +37,7 @@ class Commit(models.Model):
     project = models.ForeignKey(Project)
     sha = models.CharField(max_length=256)
 
-    yards = models.IntegerField(default=0)
+    points = models.IntegerField(default=0)
 
     def __unicode__(self):
         return u'%s' % self.sha

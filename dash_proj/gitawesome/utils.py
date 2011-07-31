@@ -45,7 +45,7 @@ def import_commits(user, project_name, sha=None):
         commit, _ = Commit.objects.get_or_create(project=project, sha=sha,
                 defaults={'user': profiles_by_author[author].user})
         # TODO: inspect repo to get changeset size to determine yards
-        commit.yards = 1
+        commit.points = 1
         commit.save()
         print "*** [DEBUG] imported commit", sha
     return commits
@@ -54,7 +54,7 @@ def calculate_points(profile):
     """
     Calculate points for given user.
     """
-    profile.yards = Commit.objects.filter(user=profile.user).aggregate(total=Sum('yards')).get('total')
+    profile.points = Commit.objects.filter(user=profile.user).aggregate(total=Sum('points')).get('total')
     profile.save()
 
 def get_commit_info(commit):
@@ -94,7 +94,7 @@ def import_contributors(username, project_name):
     print "*** [DEBUG] imported %d users" % len(contributors)
 
 def import_from_repo(username, project_name):
-    COMMITS_TO_SCORE = 1000
+    COMMITS_TO_SCORE = 100000
     import_contributors(username, project_name)
     project_url = GITHUB_REPO_BASE % (username, project_name)
     project, _ = Project.objects.get_or_create(url=project_url,
@@ -115,11 +115,14 @@ def import_from_repo(username, project_name):
                 continue
         commit, _ = Commit.objects.get_or_create(project=project, sha=sha,
                 defaults={'user': users_by_email[email]})
-        def _yards_from_commit(commit_info):
+        def _points_from_commit(commit_info):
             return commit_info['stats.total']['lines']
-        commit.yards = _yards_from_commit(commit_info)
+        commit.points = _points_from_commit(commit_info)
         imported_count +=1
         commit.save()
         #print "*** [DEBUG] imported commit", sha
     print "*** [DEBUG] imported %d commits" % imported_count
 
+import_from_repo('benoitc', 'gunicorn')
+for p in Profile.objects.filter(user__is_active=True):
+    calculate_points(p)

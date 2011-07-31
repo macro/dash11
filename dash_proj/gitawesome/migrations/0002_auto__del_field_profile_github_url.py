@@ -68,7 +68,7 @@ class Migration(SchemaMigration):
             'passes': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
             'slug': ('django.db.models.fields.SlugField', [], {'db_index': 'True', 'max_length': '256', 'blank': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
-            'yards': ('django.db.models.fields.IntegerField', [], {'default': '0'})
+            'points': ('django.db.models.fields.IntegerField', [], {'default': '0'})
         },
         'gitawesome.project': {
             'Meta': {'object_name': 'Project'},

@@ -23,7 +23,7 @@ class Migration(SchemaMigration):
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
             ('slug', self.gf('django.db.models.fields.SlugField')(max_length=256, db_index=True)),
             ('github_url', self.gf('django.db.models.fields.URLField')(max_length=200)),
-            ('yards', self.gf('django.db.models.fields.IntegerField')()),
+            ('points', self.gf('django.db.models.fields.IntegerField')()),
             ('passes', self.gf('django.db.models.fields.IntegerField')()),
         ))
         db.send_create_signal('gitawesome', ['Profile'])
@@ -101,7 +101,7 @@ class Migration(SchemaMigration):
             'passes': ('django.db.models.fields.IntegerField', [], {}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '256', 'db_index': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
-            'yards': ('django.db.models.fields.IntegerField', [], {})
+            'points': ('django.db.models.fields.IntegerField', [], {})
         },
         'gitawesome.project': {
             'Meta': {'object_name': 'Project'},

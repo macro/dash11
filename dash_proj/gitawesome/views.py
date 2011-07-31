@@ -47,15 +47,15 @@ def project(request, username, project_name):
     if context is None:
         profile = get_object_or_404(Profile, slug=slugify(username))
         project = get_object_or_404(Project, slug=slugify(project_name))
-        user_commits = itertools.groupby(sorted(project.commit_set.all(),
-                    key=operator.attrgetter('user.pk')),
-                operator.attrgetter('user'))
-        commits_by_user = sorted([(sum(c.yards for c in commits), user)
-                for user, commits in user_commits], reverse=True)
+        commits_by_user = defaultdict(list)
+        for c in project.commit_set.all():
+            commits_by_user[c.user].append(c)
+        commits = sorted([(sum(c.points for c in commits), user)
+            for user,commits in commits_by_user.iteritems()], reverse=True)
         context = {
             'profile': profile,
             'project': project,
-            'commits_by_user': commits_by_user,
+            'commits': commits,
         }
         cache.set(key, context, 3600)
     return render_to_response('gitawesome/project.html', context,

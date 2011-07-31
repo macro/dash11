@@ -8,8 +8,8 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
 
-        # Adding field 'Commit.yards'
-        db.add_column('gitawesome_commit', 'yards', self.gf('django.db.models.fields.IntegerField')(default=0), keep_default=False)
+        # Adding field 'Commit.points'
+        db.add_column('gitawesome_commit', 'points', self.gf('django.db.models.fields.IntegerField')(default=0), keep_default=False)
 
         # Adding field 'Profile.avatar_url'
         db.add_column('gitawesome_profile', 'avatar_url', self.gf('django.db.models.fields.URLField')(default='', max_length=200), keep_default=False)
@@ -26,8 +26,8 @@ class Migration(SchemaMigration):
         # Removing unique constraint on 'Profile', fields ['user']
         db.delete_unique('gitawesome_profile', ['user_id'])
 
-        # Deleting field 'Commit.yards'
-        db.delete_column('gitawesome_commit', 'yards')
+        # Deleting field 'Commit.points'
+        db.delete_column('gitawesome_commit', 'points')
 
         # Deleting field 'Profile.avatar_url'
         db.delete_column('gitawesome_profile', 'avatar_url')
@@ -79,7 +79,7 @@ class Migration(SchemaMigration):
             'project': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['gitawesome.Project']"}),
             'sha': ('django.db.models.fields.CharField', [], {'max_length': '256'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
-            'yards': ('django.db.models.fields.IntegerField', [], {'default': '0'})
+            'points': ('django.db.models.fields.IntegerField', [], {'default': '0'})
         },
         'gitawesome.profile': {
             'Meta': {'object_name': 'Profile'},
@@ -88,7 +88,7 @@ class Migration(SchemaMigration):
             'passes': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
             'slug': ('django.db.models.fields.SlugField', [], {'db_index': 'True', 'max_length': '256', 'blank': 'True'}),
             'user': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['auth.User']", 'unique': 'True'}),
-            'yards': ('django.db.models.fields.IntegerField', [], {'default': '0'})
+            'points': ('django.db.models.fields.IntegerField', [], {'default': '0'})
         },
         'gitawesome.project': {
             'Meta': {'object_name': 'Project'},

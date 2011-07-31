@@ -88,9 +88,11 @@ a:hover { color: #036; }
 
 
 
+.avatar {border: 1px solid #333; width: 40px; height: 40px;}
+.avatar-small {border: 1px solid #333; width: 20px; height: 20px;}
 .right {text-align: right;}
 .site-title {margin: 5px 0px; font-size: 3.0em;}
-.subtitle {font-size: 1.2em; margin: 10px 0px;}
+.subtitle {font-size: 1.8em; margin: 10px 0px; vertical-align: middle;}
 
 
 

@@ -3,16 +3,15 @@
 {% load humanize %}
 
 {% block content %}
-    <h3><img src="{{ profile.avatar_url }}" /> {{ profile.user.username }}&rsquo;s Scorecard</h3>
+    <h3 class="subtitle"><img class="avatar" src="{{ profile.avatar_url }}" /> {{ profile.user.username }}</h3>
     <dl>
-        <dt>Yards</dt><dd> {{ profile.yards|intcomma }} </dd>
-        <dt>Plays</dt>
+        <dt>Points</dt><dd> {{ profile.points|intcomma }} </dd>
+        <dt>Commits</dt>
         {% for project, commits in commits_by_project %}
             <dd><a href="{% url gitawesome_project profile.slug project.slug %}">{{ project.name }}</a> ({{ commits|length }}) </dd>
             {% for c in commits|slice:"10" %}
-                <dd>&nbsp;&nbsp;&nbsp;<a href="{{ c.get_github_url }}">{{ c.sha|slice:"10" }}</a> - {{ c.yards }} yard{{ c.yards|pluralize }} </dd>
+                <dd>&nbsp;&nbsp;&nbsp;<a href="{{ c.get_github_url }}">{{ c.sha|slice:"10" }}</a> - {{ c.points }} point{{ c.points|pluralize }}</dd>
             {% endfor %}
-            {% if commits|length > 10 %} &hellip; {% endif %}
         {% endfor %}
     </dl>
 {% endblock content %}
