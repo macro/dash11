@@ -19,6 +19,7 @@ def deploy(hard=False):
         run('git pull')
         run('. ../virtualenv/bin/activate && \
                 pip install -r requirements_prod.txt && \
+                FLAVOR=prod python manage.py collectstatic && \
                 FLAVOR=prod python manage.py migrate')
         hup()
         run('rm .deploy.lck')
