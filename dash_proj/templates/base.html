@@ -29,7 +29,7 @@
         
         <header id="masthead">
             <div class="wrapper">
-                <h1 id="branding">gitawesome</h1>
+                <h1 id="branding"><a href="/">gitawesome</a></h1>
                 
                 <nav>
                     <ul>
@@ -49,17 +49,17 @@
                 {% block content %}{% endblock content %}
             </div>
         </article>
-        
-        <footer>
-            <div class="wrapper">
-                <p>Created by <a href="http://twitter.com/_macro">Neil Chintomby</a> and <a href="http://twitter.com/adamkirkwood/">Adam Kirkwood</a> for Django Dash 2011.</p>
-            </div>
-            
-            {% block extra_footer %}{% endblock extra_footer %}
-        </footer>
-        
+
+        <div class="push"></div>
     </div>
 
+    <footer id="credits">
+        <div class="wrapper">
+            <p>Created by <a href="http://twitter.com/_macro">Neil Chintomby</a> and <a href="http://twitter.com/adamkirkwood/">Adam Kirkwood</a> for Django Dash 2011.</p>
+        </div>
+        
+        {% block extra_footer %}{% endblock extra_footer %}
+    </footer>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 	<script>!window.jQuery && document.write(unescape('%3Cscript src="{{ STATIC_URL }}js/libs/jquery-1.5.1.min.js"%3E%3C/script%3E'))</script>

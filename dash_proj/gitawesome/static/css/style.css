@@ -86,7 +86,15 @@ a:hover { color: #036; }
     \\ ========================================== //
 */
 
+html, body {
+	height: 100%;
+}
+
 body { background: url('../img/bg_texture.jpg'); }
+
+#container { min-height: 100%; height: auto !important; height: 100%; margin: 0 auto -30px; }
+
+#credits, .push { height: 30px; }
 
 .wrapper { width: 820px; margin: 0 auto; }
 
@@ -123,9 +131,13 @@ table { border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px;
 #project header { border-radius: 6px 6px 0 0; -moz-border-radius: 6px 6px 0 0; -webkit-border-radius: 6px 6px 0 0; }
  
 #masthead { background-color: black; height: 40px; margin: 0 0 40px 0; }
-#masthead .wrapper {  margin: 0 auto; height: 40px;}
-#masthead h1 { float: left; width: 200px; line-height: 40px; margin: 0 10px; color: white; }
+#masthead .wrapper {  margin: 0 auto; height: 40px; }
+#masthead h1 { float: left; width: 200px; line-height: 40px; margin: 0 10px; font-size: 16px; }
+#masthead h1 a { color: white; text-decoration: none; }
 #masthead nav { float: right; margin: 0 10px 0 0;}
+#masthead nav ul { margin: 0; padding: 0; height: 40px; }
+#masthead nav ul li { line-height: 40px; float: left; margin: 0 0 0 15px;}
+#masthead nav a { color: white; font-size: 14px; }
 
 .connect { background: url('../img/github_signin.png') 0px 0px no-repeat; width: 150px; height: 22px; display: block; margin: 8px 0 0 0;}
 .connect:hover { background-position: 0px -24px; }
@@ -145,9 +157,11 @@ table .name { font-size: 16px; line-height: 30px; }
 table .name img { vertical-align: middle; }
 table .date { width: 200px; }
 
+#credits { color: #6f6f6f; font-size: 10px; }
+#credits a:hover { color: white; }
 
 /*
- * Profile =p
+ * Home =h
  *************************************************************************** */
 #home { background: url('../img/bg_gitawesome.png') right 0px no-repeat; color: white; height: 400px; width: 820px; margin: 120px auto 0 auto; }
 #home h1 { font-size: 30px; }
@@ -160,7 +174,7 @@ table .date { width: 200px; }
 
 
 /*
- * Profile =p
+ * Profile =pf
  *************************************************************************** */
  
 #profile { }
@@ -191,7 +205,7 @@ table .date { width: 200px; }
 #profile #projects-list .project h2 span{ font-weight: normal; display: inline-block; margin: 0 0 0 10px; font-size: 14px; color: #7e7b7c; }
 
 /*
- * Projects =pl
+ * Projects =pj
  *************************************************************************** */
 
 #project { }
