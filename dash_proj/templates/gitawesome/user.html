@@ -2,16 +2,54 @@
 
 {% load humanize %}
 
+{% block section_id %}profile{% endblock section_id %}
 {% block content %}
-    <h3 class="subtitle"><img class="avatar" src="{{ profile.avatar_url }}" /> {{ profile.user.username }}</h3>
-    <dl>
-        <dt>Points</dt><dd> {{ profile.points|intcomma }} </dd>
-        <dt>Commits</dt>
+    <header>
+        <img class="avatar" src="{{ profile.avatar_url }}" />
+        <hgroup>
+            <h1>{{ profile.user.username }}</h1>
+            <h2>Full Name Here</h2>
+            <h2>City Name, State</h2>
+        </hgroup>
+        <div id="user-meta">
+            <ul>
+                <li><div>
+                    <span class="value">{{ profile.points|intcomma }}</span>
+                    <span class="key">Points</span>
+                    </div></li>
+                <li><div>
+                    <span class="value">XX</span>
+                    <span class="key">Repos</span>
+                    </div></li>
+                <li><div>
+                    <span class="value">X</span>
+                    <span class="key">Gists</span>
+                    </div></li>
+            </ul>
+        </div>
+    </header>
+    
+    <section id="projects-list">
+        <!-- <h1>Projects</h1> -->
+        
         {% for project, commits in commits_by_project %}
-            <dd><a href="{% url gitawesome_project profile.slug project.slug %}">{{ project.name }}</a> ({{ commits|length }}) </dd>
-            {% for c in commits|slice:"10" %}
-                <dd>&nbsp;&nbsp;&nbsp;<a href="{{ c.get_github_url }}">{{ c.sha|slice:"10" }}</a> - {{ c.points }} point{{ c.points|pluralize }}</dd>
+        <article class="project">
+            <header>
+                <h2><a href="{% url gitawesome_project profile.slug project.slug %}">{{ project.name }}</a><span>{{ commits|length }} commits</span></h2>
+            </header>
+            <table>
+                <tr>
+                    <th>SHA</th>
+                    <th>Points</th>
+                </th>
+            {% for commit in commits|slice:"10" %}
+                <tr class="{% cycle "even" "odd" %}">
+                    <td><a href="{{ c.get_github_url }}">{{ commit.sha|slice:"10" }}</a></td>
+                    <td>{{ commit.points }} point{{ commit.points|pluralize }}</td>
+                </tr>
             {% endfor %}
+            </table>
+        </article>
         {% endfor %}
-    </dl>
+    </section>
 {% endblock content %}
