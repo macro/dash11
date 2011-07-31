@@ -8,11 +8,9 @@ from django.conf import settings
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        db.create_index('gitawesome_commit', ['project_id'])
         db.create_index('gitawesome_commit', ['user_id'])
 
     def backwards(self, orm):
-        db.delete_index('gitawesome_commit', ['project_id'])
         db.delete_index('gitawesome_commit', ['user_id'])
 
 
