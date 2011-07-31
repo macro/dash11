@@ -39,13 +39,13 @@
             </header>
             <table>
                 <tr>
-                    <th>SHA</th>
-                    <th>Points</th>
+                    <th class="sha">SHA</th>
+                    <th class="points">Points</th>
                 </th>
             {% for commit in commits|slice:"10" %}
                 <tr class="{% cycle "even" "odd" %}">
-                    <td><a href="{{ c.get_github_url }}">{{ commit.sha|slice:"10" }}</a></td>
-                    <td>{{ commit.points }} point{{ commit.points|pluralize }}</td>
+                    <td class="sha"><a href="{{ c.get_github_url }}">{{ commit.sha|slice:"10" }}</a></td>
+                    <td class="points"><div><span>{{ commit.points }}</span></div></td>
                 </tr>
             {% endfor %}
             </table>
