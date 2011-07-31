@@ -29,19 +29,27 @@
         </div>
     </header>
     
-    <section>
-        <h1>Projects</h1>
+    <section id="projects-list">
+        <!-- <h1>Projects</h1> -->
         
         {% for project, commits in commits_by_project %}
-        <h2><a href="{% url gitawesome_project profile.slug project.slug %}">{{ project.name }}</a><span>{{ commits|length }}</span></h2>
+        <article class="project">
+            <header>
+                <h2><a href="{% url gitawesome_project profile.slug project.slug %}">{{ project.name }}</a><span>{{ commits|length }} commits</span></h2>
+            </header>
             <table>
-            {% for commit in commits|slice:"10" %}
                 <tr>
+                    <th>SHA</th>
+                    <th>Points</th>
+                </th>
+            {% for commit in commits|slice:"10" %}
+                <tr class="{% cycle "even" "odd" %}">
                     <td><a href="{{ c.get_github_url }}">{{ commit.sha|slice:"10" }}</a></td>
                     <td>{{ commit.points }} point{{ commit.points|pluralize }}</td>
                 </tr>
             {% endfor %}
             </table>
+        </article>
         {% endfor %}
     </section>
 {% endblock content %}

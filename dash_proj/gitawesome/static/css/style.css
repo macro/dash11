@@ -90,20 +90,52 @@ body { background-color: #34393c; }
 
 .wrapper { width: 820px; margin: 0 auto; }
 
-#profile {  }
+/* self-clear floats */
+	
+.group:after,
+header:after,
+nav:after,
+article:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+/*
+ * Profile =p
+ *************************************************************************** */
+ 
+#profile { }
 #profile .wrapper { background-color: #f1f1f1; }
-/* header */
-#profile header { background-color: #dbdfe2;  float: left; width: 100%; }
+
+/* user info */
+#profile header { background-color: #dbdfe2;  float: left; width: 100%; margin: 0 0 20px 0; }
 #profile .avatar { margin: 20px 0 20px 20px; float: left; }
 #profile hgroup { margin: 20px; float: left; width: 200px; }
 #profile header h1 { font-size: 30px; display: inline-block; width: 100%; }
 #profile header h2 { font-size: 12px; display: inline-block; width: 100%; }
+
+/* user meta */
 #profile #user-meta { float: right; margin: 20px; }
 #profile #user-meta ul { list-style: none; margin: 0; padding: 0; }
 #profile #user-meta li { float: left; background-color: #a2aaaf; height: 75px; min-width: 85px; position: relative; margin: 0 0 0 10px; }
 #profile #user-meta li .key { position: absolute; bottom: 10px; right: 10px; text-transform: uppercase; color: #5a6165; }
 #profile #user-meta li .value { display: inline-block; font-size: 30px; margin: 10px 10px 0 10px; text-align: right; float: right; }
 
+/* projects */
+#profile #projects-list { background-color: #f1f1f1; margin: 20px; padding: 0 0 20px 0; }
+#profile #projects-list .project table { width: 100%; background-color: #f5f6fa; }
+#profile #projects-list .project table .even { background-color: #f5f6fa; }
+#profile #projects-list .project table .odd { background-color: #f2f4f7; }
+#profile #projects-list .project td { height: 20px; line-height: 20px; padding: 10px 20px; }
+#profile #projects-list .project th { color: #9b9b9b; text-align: left; background-color: #eaebed; height: 10px;  padding: 10px 20px; height: 20px; line-height: 20px; }
+#profile #projects-list header { background-color: transparent; margin: 0 0 5px 5px; }
+#profile #projects-list .project h2 { background-color: transparent;  font-size: 18px; }
+#profile #projects-list .project h2 a { color: #34393c; text-decoration: none; }
+#profile #projects-list .project h2 a:hover { color: #34393c; text-decoration: underline; }
+#profile #projects-list .project h2 span{ font-weight: normal; display: inline-block; margin: 0 0 0 10px; font-size: 14px; color: #7e7b7c; }
 
 
 
