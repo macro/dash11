@@ -86,6 +86,19 @@ a:hover { color: #036; }
     \\ ========================================== //
 */
 
+body { background-color: #34393c; }
+
+.wrapper { width: 820px; margin: 0 auto; }
+
+#profile {  }
+#profile .wrapper { background-color: #f1f1f1; }
+/* header */
+#profile header { background-color: #dbdfe2;  float: left; width: 100%; }
+#profile .avatar { margin: 20px; float: left; }
+#profile hgroup { margin: 20px; float: left; width: 300px; }
+#profile h1 { font-size: 30px; display: inline-block; width: 300px; }
+#profile h2 { font-size: 12px; display: inline-block; }
+
 
 
 .avatar {border: 1px solid #333; width: 40px; height: 40px;}
