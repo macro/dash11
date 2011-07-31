@@ -104,6 +104,22 @@ article:after {
 }
 
 /*
+ * Global =g
+ *************************************************************************** */
+ 
+/* tables */
+table { width: 100%; background-color: #f5f6fa; }
+td { height: 20px; line-height: 20px; padding: 10px 20px; }
+th { color: #9b9b9b; text-align: left; background-color: #e5e5e5; height: 10px;  padding: 10px 20px; height: 20px; line-height: 20px; }
+table .even { background-color: #f5f6fa; }
+table .odd { background-color: #f2f4f7; }
+table .sha { font-size: 14px; }
+table .points div { background-color: #dce1e4; display: inline-block; min-width: 50px; text-align: center; font-size: 20px; height: 30px; line-height: 30px; }
+table .points div span { display: inline-block; padding: 0 10px; }
+
+
+
+/*
  * Profile =p
  *************************************************************************** */
  
@@ -124,13 +140,13 @@ article:after {
 #profile #user-meta li .key { position: absolute; bottom: 10px; right: 10px; text-transform: uppercase; color: #5a6165; }
 #profile #user-meta li .value { display: inline-block; font-size: 30px; margin: 10px 10px 0 10px; text-align: right; float: right; }
 
-/* projects */
+/*
+ * Projects =pl
+ *************************************************************************** */
+
+/* projects list */
 #profile #projects-list { background-color: #f1f1f1; margin: 20px; padding: 0 0 20px 0; }
-#profile #projects-list .project table { width: 100%; background-color: #f5f6fa; }
-#profile #projects-list .project table .even { background-color: #f5f6fa; }
-#profile #projects-list .project table .odd { background-color: #f2f4f7; }
-#profile #projects-list .project td { height: 20px; line-height: 20px; padding: 10px 20px; }
-#profile #projects-list .project th { color: #9b9b9b; text-align: left; background-color: #eaebed; height: 10px;  padding: 10px 20px; height: 20px; line-height: 20px; }
+
 #profile #projects-list header { background-color: transparent; margin: 0 0 5px 5px; }
 #profile #projects-list .project h2 { background-color: transparent;  font-size: 18px; }
 #profile #projects-list .project h2 a { color: #34393c; text-decoration: none; }
