@@ -107,6 +107,8 @@ article:after {
  * Global =g
  *************************************************************************** */
  
+#masthead .wrapper { background-color: black; margin: 0 auto 40px auto;}
+ 
 /* tables */
 table { width: 100%; background-color: #f5f6fa; }
 td { height: 20px; line-height: 20px; padding: 10px 20px; }
