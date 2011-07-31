@@ -6,6 +6,7 @@ gunicorn
 celery
 django-celery
 ghettoq
+GitPython
 
 python-memcached
 psycopg2

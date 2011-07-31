@@ -6,5 +6,6 @@ gunicorn
 celery
 django-celery
 ghettoq
+GitPython
 
 -e git+https://github.com/kevinw/pyflakes.git#egg=pyflakes
