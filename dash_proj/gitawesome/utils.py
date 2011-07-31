@@ -125,9 +125,13 @@ def import_and_analyze_repo(username, project_name):
     project, _ = Project.objects.get_or_create(url=project_url,
             defaults={'name': project_name})
     path = os.path.join(settings.GIT_REPO_ROOT, project_name)
-    print "*** [DEBUG] cloning repo to", path
-    repo = git.Repo().clone_from(project_url, path)
-    print "*** [DEBUG] done"
+    try:
+        # check if repo exists
+        git.Repo().pull(project_url, 'refs/heads/master:refs/heads/origin')
+        repo = git.Repo(path)
+    except Exception:
+        # otherwise, clone it
+        repo = git.Repo().clone_from(project_url, path)
     commits = repo.iter_commits('master', max_count=COMMITS_TO_SCORE)
     imported_count = 0
     users_by_email = dict([(profile.user.email, profile.user)
@@ -155,4 +159,3 @@ def import_and_analyze_repo(username, project_name):
         calculate_points(p)
     print "*** [DEBUG] imported %d commits" % imported_count
 
-import_and_analyze_repo('macro', 'dash11')
