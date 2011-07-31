@@ -23,9 +23,9 @@ def deploy(hard=False):
             return
         run('touch .deploy.lck')
         run('git pull')
+        sudo('git clean -f -d')
         run('. ../virtualenv/bin/activate && \
                 pip install -r requirements_prod.txt && \
-                git clean -f -d && \
                 FLAVOR=prod python manage.py collectstatic --noinput && \
                 FLAVOR=prod python manage.py migrate')
         hup()

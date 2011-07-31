@@ -75,7 +75,8 @@ def strip_encode(s):
     return str.strip((s or '').encode('utf-8'))
 
 def import_contributors(username, project_name):
-    contributors = github.get_contributors(username, project_name)
+    contributors = sorted(github.get_contributors(username, project_name),
+        key=lambda x: x.get('contributions', 0), reverse=True)[:20]
     profiles = list()
     for c in contributors:
         user, created = User.objects.get_or_create(username=c['login'])
@@ -159,3 +160,4 @@ def import_and_analyze_repo(username, project_name):
         calculate_points(p)
     print "*** [DEBUG] imported %d commits" % imported_count
 
+import_and_analyze_repo("rails", "rails")
