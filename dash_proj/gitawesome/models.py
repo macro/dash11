@@ -7,7 +7,7 @@ from django.template.defaultfilters import slugify
 class Project(models.Model):
     name = models.CharField(max_length=256)
     slug = models.SlugField(max_length=256, blank=True)
-    url = models.URLField(verify_exists=False)
+    url = models.URLField(verify_exists=False, unique=True)
 
     def __unicode__(self):
         return u'%s' % self.name

@@ -34,7 +34,7 @@ def repo(request):
             username, project_name = filter(None, parts[2].split('/'))
             User.objects.get_or_create(username=username)
             Project.objects.get_or_create(name=project_name,
-                    url='https://github.com/%s/%s' % (username, project_name))
+                    url='https://github.com/%s/%s/' % (username, project_name))
             analyze_repo.delay(username, project_name)
             return HttpResponseRedirect('%s?%s' % (
                         reverse('gitawesome_repo_queued'), urllib.urlencode({
