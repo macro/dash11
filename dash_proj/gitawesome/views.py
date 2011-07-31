@@ -1,7 +1,6 @@
 import urllib
 import urlparse
 from collections import defaultdict
-import itertools, operator
 
 from django.core.cache import cache
 from django.contrib.auth.models import User
@@ -58,8 +57,6 @@ def repo_queued(request):
     }
     return render_to_response('gitawesome/repo_queued.html', context,
         context_instance=RequestContext(request))
-
-
 
 def user(request, username):
     profile = get_object_or_404(Profile, slug=slugify(username))

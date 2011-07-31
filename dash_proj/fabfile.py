@@ -22,7 +22,8 @@ def deploy(hard=False):
             print 'ABORT: Another upgrade is in progress, exiting...'
             return
         run('touch .deploy.lck')
-        run('git pull')
+        run('git fetch')
+        run('git reset --hard origin/master')
         sudo('git clean -f -d')
         run('. ../virtualenv/bin/activate && \
                 pip install -r requirements_prod.txt && \
