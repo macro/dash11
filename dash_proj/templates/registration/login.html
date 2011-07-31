@@ -1,29 +1,36 @@
 {% extends "base.html" %}
 {% load url from future %}
 
-{% block menu %} {% endblock menu %}
-
+{% block section_id %}authenticate{% endblock section_id %}
 {% block content %}
+    <header id="signin">
+        <hgroup>
+            <h1>Sign in</h1>
+        </hgroup>
+    </header>
 
-    {% if form.errors %}
-        <p>Your username and password didn't match. Please try again.</p>
-    {% endif %}
+    <section id="form">
+        <article>
+            {% if form.errors %}
+                <p>Your username and password didn't match. Please try again.</p>
+            {% endif %}
 
-    <form method="post" action="{% url 'login' %}">
-        {% csrf_token %}
-        <table>
-        <tr>
-            <td>{{ form.username.label_tag }}</td>
-            <td>{{ form.username }}</td>
-        </tr>
-        <tr>
-            <td>{{ form.password.label_tag }}</td>
-            <td>{{ form.password }}</td>
-        </tr>
-        </table>
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <table>
+                <tr>
+                    <td>{{ form.username.label_tag }}</td>
+                    <td>{{ form.username }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.password.label_tag }}</td>
+                    <td>{{ form.password }}</td>
+                </tr>
+                </table>
 
-        <input type="submit" value="login" />
-        <input type="hidden" name="next" value="{{ next }}" />
-    </form>
-
-{% endblock %}
+                <input type="submit" value="login" />
+                <input type="hidden" name="next" value="{{ next }}" />
+            </form>
+        </article>
+    </section>
+{% endblock content %}

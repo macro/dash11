@@ -187,6 +187,19 @@ table .date { width: 200px; }
 #repo #add-repo h1 { font-size: 30px; display: inline-block; width: 100%; }
 #repo #form { background-color: #f1f1f1; margin: 20px; padding: 0 0 20px 0; }
 
+/*
+ * Repo =h
+ *************************************************************************** */
+
+#authenticate { }
+#authenticate .wrapper { background-color: #f1f1f1; }
+
+
+#authenticate #signin { background-color: #c2c8ca;  float: left; width: 100%; margin: 0 0 20px 0; }
+#authenticate #signin hgroup { margin: 20px; float: left; width: 200px; }
+#authenticate #signin h1 { font-size: 30px; display: inline-block; width: 100%; }
+#authenticate #form { background-color: #f1f1f1; margin: 20px; padding: 0 0 20px 0; }
+
 
 /*
  * Profile =pf
