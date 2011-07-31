@@ -138,7 +138,8 @@ INSTALLED_APPS = (
     'south',
     'gunicorn',
     'celery',
-    'djcelery',
+    'djcelery', # task results
+    'djkombu',  # messages
 
     'gitawesome',
 )
@@ -178,16 +179,14 @@ CACHES = {
 import djcelery
 djcelery.setup_loader()
 
-CARROT_BACKEND = 'ghettoq.taproot.Database'
-
+BROKER_BACKEND = 'django'
 CELERY_RESULT_BACKEND = "database"
 CELERY_RESULT_DBURI = "%(ENGINE)s://%(USER)s:%(PASSWORD)s@%(HOST)s/%(NAME)s" % DATABASES['default']
-
-CELERYD_CONCURRENCY = 1
 CELERY_ALWAYS_EAGER = True
 CELERY_IMPORTS = (
-    'gitawesome.tasks',
+        'gitawesome.tasks',
 )
+CELERYD_CONCURRENCY = 1
 
 GIT_REPO_ROOT = os.path.join(MEDIA_ROOT, '.git.tmp')
 
