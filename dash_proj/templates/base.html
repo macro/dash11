@@ -35,9 +35,10 @@
                     <ul>
                         {% if request.user.is_authenticated %}
                             <li><a href="{% url gitawesome_home %}">{{ request.user.username }}</a> |</li>
-                            <li><a href="{% url logout %}">logout</a></li>
+                            <li><a href="/repo">Add a Repo</a> |</li>
+                            <li><a href="{% url logout %}">Sign out</a></li>
                         {% else %}
-                            <li><a href="{% url login %}" class="connect"><span>login</span></a></li>
+                            <li><a href="{% url login %}"><span>Sign in</span></a></li>
                         {% endif %}
                     </ul>
                 </nav>

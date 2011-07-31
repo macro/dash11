@@ -123,12 +123,14 @@ table .points div span { background: url('../img/main_sprite.png') no-repeat; }
 
 /* rounded corners */
 #profile .wrapper,
-#project .wrapper { border-radius: 6px; -moz-border-radius: 6px; -webkit-border-radius: 6px; }
+#project .wrapper,
+#repo .wrapper { border-radius: 6px; -moz-border-radius: 6px; -webkit-border-radius: 6px; }
 
 table { border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px; }
 
 #profile header,
-#project header { border-radius: 6px 6px 0 0; -moz-border-radius: 6px 6px 0 0; -webkit-border-radius: 6px 6px 0 0; }
+#project header,
+#repo header { border-radius: 6px 6px 0 0; -moz-border-radius: 6px 6px 0 0; -webkit-border-radius: 6px 6px 0 0; }
  
 #masthead { background-color: black; height: 40px; margin: 0 0 40px 0; }
 #masthead .wrapper {  margin: 0 auto; height: 40px; }
@@ -171,6 +173,19 @@ table .date { width: 200px; }
 #home #cta .note { font-style: italic; color: #6f6f6f; font-size: 10px; margin: 5px 0;}
 
 
+
+/*
+ * Repo =h
+ *************************************************************************** */
+
+#repo { }
+#repo .wrapper { background-color: #f1f1f1; }
+
+
+#repo #add-repo { background-color: #c2c8ca;  float: left; width: 100%; margin: 0 0 20px 0; }
+#repo #add-repo hgroup { margin: 20px; float: left; width: 200px; }
+#repo #add-repo h1 { font-size: 30px; display: inline-block; width: 100%; }
+#repo #form { background-color: #f1f1f1; margin: 20px; padding: 0 0 20px 0; }
 
 
 /*

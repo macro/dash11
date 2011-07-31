@@ -1,13 +1,23 @@
 {% extends "base.html" %}
 
+
+{% block section_id %}repo{% endblock section_id %}
 {% block content %}
-<div>
-    <form method="POST"  action="{% url gitawesome_repo %}">
-        {% csrf_token %}
+    <header id="add-repo">
+        <hgroup>
+            <h1>Add a Repo</h1>
+        </hgroup>
+    </header>
 
-        {{ repo_form.as_p }}
+    <section id="form">
+        <article>
+            <form method="POST"  action="{% url gitawesome_repo %}">
+                {% csrf_token %}
 
-        <button type="submit">Add Repo</button>
-    </form>
-    </div>
+                {{ repo_form.as_p }}
+
+                <button type="submit">Add Repo</button>
+            </form>
+        </article>
+    </section>
 {% endblock content %}
