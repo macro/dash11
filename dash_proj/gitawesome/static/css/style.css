@@ -124,13 +124,15 @@ table .points div span { background: url('../img/main_sprite.png') no-repeat; }
 /* rounded corners */
 #profile .wrapper,
 #project .wrapper,
-#repo .wrapper { border-radius: 6px; -moz-border-radius: 6px; -webkit-border-radius: 6px; }
+#repo .wrapper,
+#authenticate .wrapper { border-radius: 6px; -moz-border-radius: 6px; -webkit-border-radius: 6px; }
 
 table { border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px; }
 
 #profile header,
 #project header,
-#repo header { border-radius: 6px 6px 0 0; -moz-border-radius: 6px 6px 0 0; -webkit-border-radius: 6px 6px 0 0; }
+#repo header,
+#authenticate header { border-radius: 6px 6px 0 0; -moz-border-radius: 6px 6px 0 0; -webkit-border-radius: 6px 6px 0 0; }
  
 #masthead { background-color: black; height: 40px; margin: 0 0 40px 0; }
 #masthead .wrapper {  margin: 0 auto; height: 40px; }
