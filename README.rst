@@ -1,6 +1,6 @@
 Bootstrapping
 =============
-git clone https://macro@github.com/macro/dash11.git
+git clone https://github.com/macro/dash11.git
 
 easy_install -U virtualenv
 
